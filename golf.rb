@@ -18,15 +18,27 @@ def select_option
 end
 
 def select_course
-    course = $prompt.select("What course did you play on?", $golf.print_courses)
-    return course
+    # puts $course_array
+    course = $prompt.enum_select("What course did you play?", $course_array)
+end
+
+def select_condition
+    condition = $prompt.enum_select("What is the condition of the course?", $conditions_array)
 end
 
 
 # USER ADD A ROUND
 def add_score(golf)
+    puts "What's your name?"
+    name = gets.chomp
     course = select_course
-    puts course
+    condition = select_condition
+    puts "What did you score?"
+    score = gets.chomp
+    golf.add_round(name,score,course,condition)
+    golf.print_scores
+    # puts "You (#{name}) played at #{course} on a #{condition} and scored: #{score}"
+
 end
 
 

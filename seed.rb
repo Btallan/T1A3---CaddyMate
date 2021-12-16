@@ -23,9 +23,9 @@ def seed
     course5 = Course.new("St Andrews Links Golf Course")
     course6 = Course.new("Kingston Heath Golf Course")
 
-    course_array = [course1, course2, course3, course4, course5, course6]
+    $course_array = [course1, course2, course3, course4, course5, course6]
 
-    # return course_array
+    #puts course_array
 
     # CREATE AN ARRAY OF WEATHER TYPES
     condition1 = Condition.new("Fine")
@@ -33,7 +33,7 @@ def seed
     condition3 = Condition.new("Raining")
     condition4 = Condition.new("Morning Dew")
 
-    conditions_array = [condition1, condition2, condition3, condition4]
+    $conditions_array = [condition1, condition2, condition3, condition4]
 
     # return conditions_array
 
@@ -44,6 +44,5 @@ def seed
 
     return rounds
     
-
-
 end
+
