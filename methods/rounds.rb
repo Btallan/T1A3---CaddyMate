@@ -16,10 +16,16 @@ class Rounds
         end
     end
 
+    
+
     # Add Round
     def add_round(name, score, course,condition)
         round = Score.new(name, score,course,condition)
         @rounds << round
+    end
+
+    def delete_game(round)
+        rounds.delete(round)
     end
 
 end

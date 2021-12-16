@@ -1,5 +1,5 @@
 class Score
-    attr_reader :player, :score, :course, :condition
+    attr_accessor :player, :score, :course, :condition
     def initialize(player,score, course, condition)
         @player = player
         @score = score
@@ -10,4 +10,9 @@ class Score
     def to_s
         "#{@player} scored: #{@score} on #{@course} on a #{@condition} day."
     end
+
+    def change_variable
+        @player = @name 
+    end
+
 end

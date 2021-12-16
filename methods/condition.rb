@@ -1,6 +1,6 @@
 class Condition
 
-    def initialize(condition)
+    def initialize(condition,multiplier)
         @condition = condition
     end
 

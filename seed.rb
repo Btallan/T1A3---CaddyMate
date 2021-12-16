@@ -8,10 +8,18 @@ require_relative './methods/rounds.rb'
 def seed
     # CREATE AN ARRAY OF PROFESSINALS
 
-    player1 = Player.new("Adam Scott")
-    player2 = Player.new("Ben Allan")
+    player1 = Player.new("Ben Allan")
+    player2 = Player.new("Adam Scott")
+    player3 = Player.new("Jon Rahm")
+    player4 = Player.new("Collin Morikawa")
+    player5 = Player.new("Tiger Woods")
+    player6 = Player.new("Jack Nicklaus")
+    player7 = Player.new("Bobby Jones")
+    player8 = Player.new("Phil Mickelson")
+    player9 = Player.new("Vijay Singh")
+    player10 = Player.new("Greg Norman")
 
-    players_array = [player1, player2]
+    $players_array = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10]
 
     # return players_array    
 
@@ -28,10 +36,10 @@ def seed
     #puts course_array
 
     # CREATE AN ARRAY OF WEATHER TYPES
-    condition1 = Condition.new("Fine")
-    condition2 = Condition.new("Windy")
-    condition3 = Condition.new("Raining")
-    condition4 = Condition.new("Morning Dew")
+    condition1 = Condition.new("Fine", 1)
+    condition2 = Condition.new("Windy", 0.2)
+    condition3 = Condition.new("Raining", 0.5)
+    condition4 = Condition.new("Morning Dew", 0.75)
 
     $conditions_array = [condition1, condition2, condition3, condition4]
 
@@ -40,9 +48,9 @@ def seed
     # CREATE AN ARRAY OF PREVIOUS SCORES
 
 
-    rounds = Rounds.new([Score.new(player2, 72,course1,condition1), Score.new(player2, 80,course4,condition2)])
+    $rounds = Rounds.new([Score.new("Ben Allan", 72,course1,condition1), Score.new("Ben Allan", 80,course4,condition2)])
 
-    return rounds
+    # return rounds
     
 end
 
