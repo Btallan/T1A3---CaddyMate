@@ -33,14 +33,15 @@ def add_score(golf)
     puts "What did you score?"
     score = gets.chomp
     golf.add_round(name,score,course,condition)
-    golf.print_scores
-    # puts "You (#{name}) played at #{course} on a #{condition} and scored: #{score}"
+    # golf.print_scores
+    puts "You (#{name}) played at #{course} on a #{condition} and scored: #{score}"
 
 end
 
 
 # USER UPDATE PREVIOUS ROUND
 def update_round(golf)
+    system "clear"
     round = select_round
     # puts round.select(player)
     option = $prompt.enum_select("What would you like to change?", "Name","Score", "Course","Condition","All","None")
@@ -121,28 +122,48 @@ end
 
 ## GAME FUNCTIONALITY ##
 def game
+    # User add & select inputs
     puts "What's your name?"
     name = gets.chomp
     professional1 = select_player
     professional2 = select_player
     course = select_course
     condition = select_condition
-
+    system "clear"
+    # Starting the game
     puts "On the first tee we have: #{name}, #{professional1}, #{professional2} at #{course} on a #{condition} day!"
+    sleep(3)
     puts "Great Shot! See you at the clubhouse!"
     sleep(5)
-    # CALCULATE SCORES
+    # Multipliers
+    condition_difficulty = course.difficulty
+    course_difficulty = condition.difficulty
+    # puts "Course Multiplier: #{course.difficulty}"
+    # puts "Condition Multiplier: #{condition.difficulty}"
+    overall_multiplier = ((course.difficulty + condition.difficulty)/2) + 0.4    
+    # puts "Overall Multiplier #{overall_multiplier}"
     # random score (68-85) x multiple of condition
-
+    # Generating player Scores
+    name_score = rand(68..85) * overall_multiplier
+    professional1_score = rand(68..85) * overall_multiplier
+    professional2_score = rand(68..85) * overall_multiplier
+    name_score.to_i
+    professional1_score.truncate()
+    professional2_score.truncate()
+    # Printing user scores
+    system "clear"
     puts "So here's how the group went!"
-
+    puts "#{name} scored: #{name_score}"
+    puts "#{professional1} scored: #{professional1_score}"
+    puts "#{professional2} scored: #{professional2_score}"
+    if name_score < professional1_score && name_score < professional2_score
+        puts "Congratulations you won!"
+    elsif name_score > professional1_score && name_score < professional2_score || name_score < professional1_score && name_score > professional2_score
+        puts "Nice work out there!"
+    else
+        puts "Better luck next time!"
+    end
 end
-
-
-
-
-
-
 
 
 

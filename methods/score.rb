@@ -11,8 +11,4 @@ class Score
         "#{@player} scored: #{@score} on #{@course} on a #{@condition} day."
     end
 
-    def change_variable
-        @player = @name 
-    end
-
 end

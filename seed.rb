@@ -24,22 +24,22 @@ def seed
     # return players_array    
 
     # CREATE AN ARRAY OF COURSES
-    course1 = Course.new("Bargara Golf Course")
-    course2 = Course.new("Augusta National Golf Course")
-    course3 = Course.new("Cypress Point Golf Course")
-    course4 = Course.new("Royal Melbourne Golf Course")
-    course5 = Course.new("St Andrews Links Golf Course")
-    course6 = Course.new("Kingston Heath Golf Course")
+    course1 = Course.new("Bargara Golf Course", 0.2)
+    course2 = Course.new("Augusta National Golf Course" , 1)
+    course3 = Course.new("Cypress Point Golf Course", 0.9)
+    course4 = Course.new("Royal Melbourne Golf Course", 0.8)
+    course5 = Course.new("St Andrews Links Golf Course", 0.5)
+    course6 = Course.new("Kingston Heath Golf Course", 0.6)
 
     $course_array = [course1, course2, course3, course4, course5, course6]
 
     #puts course_array
 
     # CREATE AN ARRAY OF WEATHER TYPES
-    condition1 = Condition.new("Fine", 1)
-    condition2 = Condition.new("Windy", 0.2)
+    condition1 = Condition.new("Fine", 0)
+    condition2 = Condition.new("Windy", 0.8)
     condition3 = Condition.new("Raining", 0.5)
-    condition4 = Condition.new("Morning Dew", 0.75)
+    condition4 = Condition.new("Morning Dew", 0.25)
 
     $conditions_array = [condition1, condition2, condition3, condition4]
 

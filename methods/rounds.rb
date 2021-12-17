@@ -8,15 +8,12 @@ class Rounds
         puts "#{@rounds}"
     end
 
-
     # Show round
     def print_scores
         @rounds.each do |round|
             puts round
         end
-    end
-
-    
+    end    
 
     # Add Round
     def add_round(name, score, course,condition)
@@ -24,6 +21,7 @@ class Rounds
         @rounds << round
     end
 
+    # Delete Round
     def delete_game(round)
         rounds.delete(round)
     end

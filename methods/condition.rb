@@ -1,7 +1,8 @@
 class Condition
-
-    def initialize(condition,multiplier)
+    attr_accessor :difficulty
+    def initialize(condition,difficulty)
         @condition = condition
+        @difficulty = difficulty
     end
 
     def to_s
