@@ -31,6 +31,14 @@ def select_player
     player = $prompt.enum_select("Choose a professional?", $players_array)
 end
 
+def select_club
+    club = $prompt.enum_select("What club would you like?", $clubs_array)
+end
+
+def select_swing_speed
+    puts "How hard would you like to swing? (1-100)"
+    swing_speed = gets.chomp
+end
 
 def check_score
     validity = false
@@ -101,9 +109,7 @@ def update_round(golf)
         when "Name"
             puts "Update Name"
             puts "Your name was: #{round.player}".colorize(:yellow)
-            # USER INPUT NAME & VALIDATION
-            name = check_name     
-            round.player = name
+            round.player = check_name
             puts "#{round}".colorize(:yellow)
         when "Score"
             puts "Update Score"
@@ -113,32 +119,25 @@ def update_round(golf)
         when "Course"
             puts "Update Course"
             puts "The course was: #{round.course}".colorize(:yellow)
-            # puts "What course were you playing on?"
-            course = select_course
-            round.course = course
+            round.course = select_course
             puts "#{round}".colorize(:yellow)
         when "Condition"
             puts "Update Condition"
             puts "The conditions were: #{round.condition}".colorize(:yellow)
-            # puts "What were the conditions when you played?"
-            condition = select_condition
-            round.condition = condition
+            round.condition = select_condition
             puts "#{round}".colorize(:yellow)
         when "All"
             puts "Update All"
             # Name Update
             puts "Your name was: #{round.player}".colorize(:yellow)
-            # USER INPUT NAME & VALIDATION
             name = check_name   
             round.player = name
             # Course Update
             puts "The course was: #{round.course}".colorize(:yellow)
-            course = select_course
-            round.course = course
+            round.course = select_course
             # Conditions Update
             puts "The conditions were: #{round.condition}".colorize(:yellow)
-            condition = select_condition
-            round.condition = condition
+            round.condition = select_condition
             # Score Update
             puts "The score was: #{round.score}".colorize(:yellow)
             round.score = check_score        
@@ -169,9 +168,9 @@ end
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
-# GAME FUNCTIONALITY
+# Play the Pros FUNCTIONALITY
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
-def game
+def play_the_pros
     # User add & select inputs
     # USER INPUT NAME & VALIDATION
     name = check_name   
@@ -215,6 +214,55 @@ def game
     end
 end
 
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+# Play a Hole FUNCTIONALITY
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+def play_a_hole
+
+    # GENERATE HOLE
+    length = rand(150..500).to_i
+    if length > 150 && length < 275
+        difficulty = 0.2
+        level = "Easy"
+    elsif length > 276 && length < 400
+        difficulty = 0.4
+        level = "Medium"
+    else
+        difficulty = 0.6
+        level = "Hard"
+    end
+
+    puts "The length of the whole is #{length}m"
+    puts "THe difficulty is: #{level} - #{difficulty}"
+
+    distance_left = length
+    while distance_left > 15
+
+        # USER SELECTS CLUB & SPEED
+        club = select_club
+        puts "Club Used: #{club}"
+        swing_speed = select_swing_speed
+        puts "Swing Speed: #{swing_speed}"
+
+        # GENERATE LENGTH OF HIT & Accuracy
+        club_hit = rand(0.1..1) * swing_speed.to_i
+        puts "Hit Distance: #{club_hit}m" 
+        puts "Distance Left: #{distance_left}m"
+
+
+
+        # CALCULATE DISTANCE LEFT
+        distance_left.to_i - club_hit.to_i
+        puts "Distance Left: #{distance_left}m"
+    end
+
+end 
+
+
+
+
+
+
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -227,7 +275,7 @@ option = ""
 
 # GET USERS MENU OPTIONS
 def select_option
-    answer = $prompt.enum_select("What would you like to do today?".colorize(:yellow), "View rounds", "Add latest round", "Update a previous round", "Delete a round","Play with the pros","Exit")
+    answer = $prompt.enum_select("What would you like to do today?".colorize(:yellow), "View rounds", "Add latest round", "Update a previous round", "Delete a round","Play with the pros","Play a Hole","Exit")
     return answer
 end
 
@@ -246,7 +294,9 @@ while option !="Exit"
         when "Delete a round"
             delete_round($golf)
         when "Play with the pros"
-            game
+            play_the_pros
+        when "Play a Hole"
+            play_a_hole
         when "Exit"
             #
         else

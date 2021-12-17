@@ -3,9 +3,20 @@ require_relative './methods/course.rb'
 require_relative './methods/condition.rb'
 require_relative './methods/score.rb'
 require_relative './methods/rounds.rb'
+require_relative './methods/club.rb'
 
 
 def seed
+    # CREATE AN ARRAY OF CLUBS
+    driver = Club.new("Driver", 100)
+    iron5 = Club.new("5 Iron", 80)
+    iron7 = Club.new("7 Iron", 60)
+    iron9 = Club.new("9 Iron", 40)
+    pitching = Club.new("Pitching Wedge", 20)
+    putter = Club.new("Putter",10)
+
+    $clubs_array = [driver, iron5, iron7, iron9, pitching, putter]
+
     # CREATE AN ARRAY OF PROFESSINALS
 
     player1 = Player.new("Ben Allan")
