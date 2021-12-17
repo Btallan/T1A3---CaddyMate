@@ -1,5 +1,6 @@
 # **Software Development Plan**
 
+![CaddyMate Logo](./img/CaddyMate.png)
 
 ## **Vital Links**
 [Github Repo](https://github.com/Btallan/T1A3---CaddyMate)
@@ -81,5 +82,5 @@ Users will also be able to edit the data points of their previous matches such a
 ![Control Flow Diagram](./img/Control_Flows.PNG)
 
 ## Trello board progression
-![Trello Board Progression: 17-12-21](./img/17-12-21 Trello Screenshot.PNG)
+![Trello Board Progression: 17-12-21](./img/17-12-21_Trello_Screenshot.PNG)
 
