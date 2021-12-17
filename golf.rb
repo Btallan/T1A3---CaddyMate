@@ -8,8 +8,10 @@ $prompt = TTY::Prompt.new
 artii = Artii::Base.new
 system "clear"
 
+
+
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
-# SELECTION QUERIES
+# SELECTION & CHECK METHODS
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 def select_course
@@ -30,28 +32,46 @@ def select_player
 end
 
 
-def check_score(score)
-    #  CHECKING USER SCORE IS BETWEEN 1 TO 300
-    if score.to_i > 1 && score.to_i < 300        
-        return true
-        #puts "Score is valid: 1-300"
-    elsif score.to_i <= 1
-        puts "You can't score less than 1!".colorize(:red)
-    else
-        # IF SCORE OVER 300 PROMPT USER
-        puts "Did you really score over 300? (y/n)"
-        answer = gets.chomp
-        if answer == "y"
-            return true
-            #puts "Score is valid: 300+"
-        elsif
-            puts "Score was entered in-correctly!"
-        end
-    end 
+def check_score
+    validity = false
+    while validity != true
+        puts "What did you score?"
+        score = gets.chomp.to_i
+        #  CHECKING USER SCORE IS BETWEEN 1 TO 300
+        if score.to_i > 1 && score.to_i < 300        
+            validity = true
+            #puts "Score is valid: 1-300"
+        elsif score.to_i <= 1
+            puts "You can't score less than 1!".colorize(:red)
+            redo
+        else
+            # IF SCORE OVER 300 PROMPT USER
+            puts "Did you really score over 300? (y/n)"
+            answer = gets.chomp
+            if answer == "y"
+                validity = true
+                #puts "Score is valid: 300+"
+            elsif
+                puts "Score was entered in-correctly!"
+                redo
+            end
+        end 
+    end
+    return score
 end
 
-def name_checker
-    
+def check_name
+    name = ""
+    while name == ""
+        puts "What's your name?"
+        name = gets.chomp
+        if !name.empty?
+            return name
+            break
+        else
+            puts "Please enter a valid name!"      
+        end
+    end
 end
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -61,26 +81,13 @@ end
 # USER ADD A ROUND
 def add_score(golf)
     # USER INPUT NAME & VALIDATION
-    name = ""
-    while name == ""
-        puts "What's your name?"
-        name = gets.chomp
-        if !name.empty?
-            break
-        else
-            puts "Please enter a valid name!"      
-        end
-    end
+    name = check_name
     course = select_course
-    condition = select_condition
-    puts "What did you score?"
-    score = gets.chomp.to_i
-    #  CHECKING USER SCORE IS BETWEEN 1 TO 300
-    validity = check_score(score)
-    if validity == true
-        $golf.add_round(name,score,course,condition)
-        puts "You (#{name}) played at #{course} on a #{condition} and scored: #{score}".colorize(:green)
-    end  
+    condition = select_condition  
+    score = check_score
+    $golf.add_round(name,score,course,condition)
+    puts "You (#{name}) played at #{course} on a #{condition} and scored: #{score}".colorize(:green)
+
 end
 
 
@@ -95,28 +102,13 @@ def update_round(golf)
             puts "Update Name"
             puts "Your name was: #{round.player}".colorize(:yellow)
             # USER INPUT NAME & VALIDATION
-            name = ""
-            while name == ""
-                puts "What should we update the name to?"
-                name = gets.chomp
-                if !name.empty?
-                    break
-                else
-                    puts "Please enter a valid name!"      
-                end
-            end      
+            name = check_name     
             round.player = name
             puts "#{round}".colorize(:yellow)
         when "Score"
             puts "Update Score"
             puts "Your score was: #{round.score}".colorize(:yellow)
-            puts "What should the score be?"
-            score = gets.chomp
-            #  CHECKING USER SCORE IS BETWEEN 1 TO 300
-            validity = check_score(score)
-            if validity == true
-                round.score = score                
-            end 
+            round.score = check_score
             puts "#{round}".colorize(:yellow)
         when "Course"
             puts "Update Course"
@@ -137,16 +129,7 @@ def update_round(golf)
             # Name Update
             puts "Your name was: #{round.player}".colorize(:yellow)
             # USER INPUT NAME & VALIDATION
-            name = ""
-            while name == ""
-                puts "What should we update the name to?"
-                name = gets.chomp
-                if !name.empty?
-                    break
-                else
-                    puts "Please enter a valid name!"      
-                end
-            end      
+            name = check_name   
             round.player = name
             # Course Update
             puts "The course was: #{round.course}".colorize(:yellow)
@@ -158,13 +141,7 @@ def update_round(golf)
             round.condition = condition
             # Score Update
             puts "The score was: #{round.score}".colorize(:yellow)
-            puts "What should the score be?"
-            score = gets.chomp
-            #  CHECKING USER SCORE IS BETWEEN 1 TO 300
-            validity = check_score(score)
-            if validity == true
-                round.score = score                
-            end            
+            round.score = check_score        
             puts "#{round}".colorize(:yellow)
         when "None"
             #
@@ -197,16 +174,7 @@ end
 def game
     # User add & select inputs
     # USER INPUT NAME & VALIDATION
-    name = ""
-    while name == ""
-        puts "What's your name?"
-        name = gets.chomp
-        if !name.empty?
-            break
-        else
-            puts "Please enter a valid name!"      
-        end
-    end      
+    name = check_name   
     professional1 = select_player
     professional2 = select_player
     course = select_course
@@ -233,7 +201,7 @@ def game
 
     # Printing user scores
     system "clear"
-    puts "Overall Multiplier #{overall_multiplier}"
+    # puts "Overall Multiplier #{overall_multiplier}"
     puts "So here's how the group went!".colorize(:yellow)
     puts "#{name} scored: #{name_score.truncate()}"
     puts "#{professional1} scored: #{professional1_score.truncate()}"
