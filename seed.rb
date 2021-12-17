@@ -1,7 +1,7 @@
-require_relative 'methods/player.rb'
+require_relative './methods/player.rb'
 require_relative './methods/course.rb'
-require_relative 'methods/condition.rb'
-require_relative 'methods/score.rb'
+require_relative './methods/condition.rb'
+require_relative './methods/score.rb'
 require_relative './methods/rounds.rb'
 
 
@@ -36,7 +36,7 @@ def seed
     #puts course_array
 
     # CREATE AN ARRAY OF WEATHER TYPES
-    condition1 = Condition.new("Fine", 0)
+    condition1 = Condition.new("Fine", 0.1)
     condition2 = Condition.new("Windy", 0.8)
     condition3 = Condition.new("Raining", 0.5)
     condition4 = Condition.new("Morning Dew", 0.25)

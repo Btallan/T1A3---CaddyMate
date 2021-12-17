@@ -1,5 +1,10 @@
 # **Software Development Plan**
 
+## **Vital Links**
+
+### Github
+### Trello
+
 ## ***Purpose***
 Describe at a high level what the application will do,
 Identify the problem it will solve and explain why you are developing it,

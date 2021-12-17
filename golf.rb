@@ -27,18 +27,42 @@ def select_player
 end
 
 
+
+
 # USER ADD A ROUND
 def add_score(golf)
-    puts "What's your name?"
-    name = gets.chomp
+    # USER INPUT NAME & VALIDATION
+    name = ""
+    while name == ""
+        puts "What's your name?"
+        name = gets.chomp
+        if !name.empty?
+            break
+        else
+            puts "Please enter a valid name!"      
+        end
+    end
     course = select_course
     condition = select_condition
     puts "What did you score?"
-    score = gets.chomp
-    golf.add_round(name,score,course,condition)
-    # golf.print_scores
-    puts "You (#{name}) played at #{course} on a #{condition} and scored: #{score}".colorize(:red)
-
+    score = gets.chomp.to_i
+    #  CHECKING USER SCORE IS BETWEEN 1 TO 300
+    if score.to_i > 1 && score.to_i < 300
+        $golf.add_round(name,score,course,condition)
+        puts "You (#{name}) played at #{course} on a #{condition} and scored: #{score}".colorize(:green)
+    elsif score.to_i <= 1
+        puts "You can't score less than 1!".colorize(:red)
+    else
+        # IF SCORE OVER 300 PROMPT USER
+        puts "Did you really score over 300? (y/n)"
+        answer = gets.chomp
+        if answer == "y"
+            $golf.add_round(name,score,course,condition)
+            puts "You (#{name}) played at #{course} on a #{condition} and scored: #{score}".colorize(:red)    
+        elsif
+            puts "Score was entered in-correctly!"
+        end
+    end    
 end
 
 
@@ -51,52 +75,100 @@ def update_round(golf)
     case option
         when "Name"
             puts "Update Name"
-            puts "Your name was: #{round.player}"
-            puts "What should we update the name to?"           
-            name = gets.chomp
+            puts "Your name was: #{round.player}".colorize(:yellow)
+            # USER INPUT NAME & VALIDATION
+            name = ""
+            while name == ""
+                puts "What should we update the name to?"
+                name = gets.chomp
+                if !name.empty?
+                    break
+                else
+                    puts "Please enter a valid name!"      
+                end
+            end      
             round.player = name
-            puts round
+            puts "#{round}".colorize(:yellow)
         when "Score"
             puts "Update Score"
-            puts "Your score was: #{round.score}"
+            puts "Your score was: #{round.score}".colorize(:yellow)
             puts "What should the score be?"
             score = gets.chomp
-            round.score = score
-            puts round
+            #  CHECKING USER SCORE IS BETWEEN 1 TO 300
+            if score.to_i > 1 && score.to_i < 300
+                round.score = score                
+            elsif score.to_i <= 1
+                puts "You can't score less than 1!".colorize(:red)
+            else
+                # IF SCORE OVER 300 PROMPT USER
+                puts "Did you really score over 300? (y/n)"
+                answer = gets.chomp
+                if answer == "y"
+                    round.score = score                    
+                elsif
+                    puts "Score was entered in-correctly!"
+                end
+            end
+            puts "#{round}".colorize(:yellow)
         when "Course"
             puts "Update Course"
-            puts "The course was: #{round.course}"
-            puts "What course were you playing on?"
+            puts "The course was: #{round.course}".colorize(:yellow)
+            # puts "What course were you playing on?"
             course = select_course
             round.course = course
-            puts round
+            puts "#{round}".colorize(:yellow)
         when "Condition"
             puts "Update Condition"
-            puts "The conditions were: #{round.condition}"
-            puts "What were the conditions when you played?"
+            puts "The conditions were: #{round.condition}".colorize(:yellow)
+            # puts "What were the conditions when you played?"
             condition = select_condition
             round.condition = condition
-            puts round
+            puts "#{round}".colorize(:yellow)
         when "All"
             puts "Update All"
             # Name Update
-            puts "Your name was: #{round.player}"
-            puts "What should we update the name to?"           
-            name = gets.chomp
+            puts "Your name was: #{round.player}".colorize(:yellow)
+            # USER INPUT NAME & VALIDATION
+            name = ""
+            while name == ""
+                puts "What should we update the name to?"
+                name = gets.chomp
+                if !name.empty?
+                    break
+                else
+                    puts "Please enter a valid name!"      
+                end
+            end      
             round.player = name
             # Course Update
-            puts "What course were you playing on?"
+            puts "The course was: #{round.course}".colorize(:yellow)
             course = select_course
             round.course = course
             # Conditions Update
-            puts "What were the conditions when you played?"
+            puts "The conditions were: #{round.condition}".colorize(:yellow)
             condition = select_condition
             round.condition = condition
             # Score Update
+            puts "The score was: #{round.score}".colorize(:yellow)
             puts "What should the score be?"
             score = gets.chomp
-            round.score = score
-            puts round
+                        #  CHECKING USER SCORE IS BETWEEN 1 TO 300
+                        if score.to_i > 1 && score.to_i < 300
+                            round.score = score                
+                        elsif score.to_i <= 1
+                            puts "You can't score less than 1!".colorize(:red)
+                        else
+                            # IF SCORE OVER 300 PROMPT USER
+                            puts "Did you really score over 300? (y/n)"
+                            answer = gets.chomp
+                            if answer == "y"
+                                round.score = score                    
+                            elsif
+                                puts "Score was entered in-correctly!"
+                            end
+                        end
+            
+            puts "#{round}".colorize(:yellow)
         when "None"
             #
         else
@@ -127,8 +199,17 @@ end
 ## GAME FUNCTIONALITY ##
 def game
     # User add & select inputs
-    puts "What's your name?"
-    name = gets.chomp
+    # USER INPUT NAME & VALIDATION
+    name = ""
+    while name == ""
+        puts "What's your name?"
+        name = gets.chomp
+        if !name.empty?
+            break
+        else
+            puts "Please enter a valid name!"      
+        end
+    end      
     professional1 = select_player
     professional2 = select_player
     course = select_course
@@ -144,16 +225,18 @@ def game
     course_difficulty = condition.difficulty
     # puts "Course Multiplier: #{course.difficulty}"
     # puts "Condition Multiplier: #{condition.difficulty}"
-    overall_multiplier = ((course.difficulty + condition.difficulty)/2) + 0.4    
-    # puts "Overall Multiplier #{overall_multiplier}"
+    overall_multiplier = ((course.difficulty + condition.difficulty)/2) + 1    
+    #puts "Overall Multiplier #{overall_multiplier}"
     # random score (68-85) x multiple of condition
     # Generating player Scores
-    name_score = rand(68..85) * overall_multiplier
-    professional1_score = rand(68..85) * overall_multiplier
-    professional2_score = rand(68..85) * overall_multiplier
+    odds = rand(68..72)
+    name_score = odds * overall_multiplier
+    professional1_score = odds * overall_multiplier
+    professional2_score = odds * overall_multiplier
 
     # Printing user scores
     system "clear"
+    puts "Overall Multiplier #{overall_multiplier}"
     puts "So here's how the group went!".colorize(:yellow)
     puts "#{name} scored: #{name_score.truncate()}"
     puts "#{professional1} scored: #{professional1_score.truncate()}"
