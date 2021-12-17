@@ -8,8 +8,10 @@ $prompt = TTY::Prompt.new
 artii = Artii::Base.new
 system "clear"
 
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 # SELECTION QUERIES
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
 def select_course
     course = $prompt.enum_select("What course did you play?", $course_array)
 end
@@ -22,12 +24,39 @@ def select_round
     rounds = $prompt.enum_select("What round would you like to select?", $golf.print_scores)
 end
 
+
 def select_player
     player = $prompt.enum_select("Choose a professional?", $players_array)
 end
 
 
+def check_score(score)
+    #  CHECKING USER SCORE IS BETWEEN 1 TO 300
+    if score.to_i > 1 && score.to_i < 300        
+        return true
+        #puts "Score is valid: 1-300"
+    elsif score.to_i <= 1
+        puts "You can't score less than 1!".colorize(:red)
+    else
+        # IF SCORE OVER 300 PROMPT USER
+        puts "Did you really score over 300? (y/n)"
+        answer = gets.chomp
+        if answer == "y"
+            return true
+            #puts "Score is valid: 300+"
+        elsif
+            puts "Score was entered in-correctly!"
+        end
+    end 
+end
 
+def name_checker
+    
+end
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+# CRUD QUERIES
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 # USER ADD A ROUND
 def add_score(golf)
@@ -47,22 +76,11 @@ def add_score(golf)
     puts "What did you score?"
     score = gets.chomp.to_i
     #  CHECKING USER SCORE IS BETWEEN 1 TO 300
-    if score.to_i > 1 && score.to_i < 300
+    validity = check_score(score)
+    if validity == true
         $golf.add_round(name,score,course,condition)
         puts "You (#{name}) played at #{course} on a #{condition} and scored: #{score}".colorize(:green)
-    elsif score.to_i <= 1
-        puts "You can't score less than 1!".colorize(:red)
-    else
-        # IF SCORE OVER 300 PROMPT USER
-        puts "Did you really score over 300? (y/n)"
-        answer = gets.chomp
-        if answer == "y"
-            $golf.add_round(name,score,course,condition)
-            puts "You (#{name}) played at #{course} on a #{condition} and scored: #{score}".colorize(:red)    
-        elsif
-            puts "Score was entered in-correctly!"
-        end
-    end    
+    end  
 end
 
 
@@ -95,20 +113,10 @@ def update_round(golf)
             puts "What should the score be?"
             score = gets.chomp
             #  CHECKING USER SCORE IS BETWEEN 1 TO 300
-            if score.to_i > 1 && score.to_i < 300
+            validity = check_score(score)
+            if validity == true
                 round.score = score                
-            elsif score.to_i <= 1
-                puts "You can't score less than 1!".colorize(:red)
-            else
-                # IF SCORE OVER 300 PROMPT USER
-                puts "Did you really score over 300? (y/n)"
-                answer = gets.chomp
-                if answer == "y"
-                    round.score = score                    
-                elsif
-                    puts "Score was entered in-correctly!"
-                end
-            end
+            end 
             puts "#{round}".colorize(:yellow)
         when "Course"
             puts "Update Course"
@@ -152,22 +160,11 @@ def update_round(golf)
             puts "The score was: #{round.score}".colorize(:yellow)
             puts "What should the score be?"
             score = gets.chomp
-                        #  CHECKING USER SCORE IS BETWEEN 1 TO 300
-                        if score.to_i > 1 && score.to_i < 300
-                            round.score = score                
-                        elsif score.to_i <= 1
-                            puts "You can't score less than 1!".colorize(:red)
-                        else
-                            # IF SCORE OVER 300 PROMPT USER
-                            puts "Did you really score over 300? (y/n)"
-                            answer = gets.chomp
-                            if answer == "y"
-                                round.score = score                    
-                            elsif
-                                puts "Score was entered in-correctly!"
-                            end
-                        end
-            
+            #  CHECKING USER SCORE IS BETWEEN 1 TO 300
+            validity = check_score(score)
+            if validity == true
+                round.score = score                
+            end            
             puts "#{round}".colorize(:yellow)
         when "None"
             #
@@ -194,9 +191,9 @@ def delete_round(golf)
 end
 
 
-
-
-## GAME FUNCTIONALITY ##
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+# GAME FUNCTIONALITY
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 def game
     # User add & select inputs
     # USER INPUT NAME & VALIDATION
@@ -252,12 +249,11 @@ end
 
 
 
-
-## MENU FUNCTIONALITY ##
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+# MENU FUNCTIONALITY
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 # WELCOME USER & SHOW MENU
-
 option = "" 
 
 
@@ -266,6 +262,7 @@ def select_option
     answer = $prompt.enum_select("What would you like to do today?".colorize(:yellow), "View rounds", "Add latest round", "Update a previous round", "Delete a round","Play with the pros","Exit")
     return answer
 end
+
 # MENU OPERATION
 while option !="Exit"    
     system "artii 'CaddyMate'"

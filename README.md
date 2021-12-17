@@ -84,7 +84,7 @@ Users will also be able to edit the data points of their previous matches such a
 ## Trello board progression
 ### 16-12-21
 ![Trello Board Progression: 17-12-21](./img/16-12-21_Trello_Screenshot_T1A3.PNG)
-![Trello Board Progression: 17-12-21](./img/16-12-21_Trello_Screenshot_T1A3#2.PNG)
+![Trello Board Progression: 17-12-21](./img/16-12-21_Trello_Screenshot_T1A3_2.PNG)
 
 ### 17-12-21
 ![Trello Board Progression: 17-12-21](./img/17-12-21_Trello_Screenshot.PNG)
