@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    artii (2.1.2)
+    colorize (0.8.1)
     concurrent-ruby (1.1.9)
     faker (2.19.0)
       i18n (>= 1.6, < 2)
@@ -24,6 +26,8 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  artii (~> 2.1)
+  colorize (~> 0.8.1)
   faker
   tty-prompt
 

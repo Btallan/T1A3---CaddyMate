@@ -1,13 +1,16 @@
 require_relative 'seed.rb'
 require "tty-prompt"
+require "artii"
+require "colorize"
 
 $golf = seed
 $prompt = TTY::Prompt.new
+artii = Artii::Base.new
 system "clear"
 
 
+# SELECTION QUERIES
 def select_course
-    # puts $course_array
     course = $prompt.enum_select("What course did you play?", $course_array)
 end
 
@@ -34,7 +37,7 @@ def add_score(golf)
     score = gets.chomp
     golf.add_round(name,score,course,condition)
     # golf.print_scores
-    puts "You (#{name}) played at #{course} on a #{condition} and scored: #{score}"
+    puts "You (#{name}) played at #{course} on a #{condition} and scored: #{score}".colorize(:red)
 
 end
 
@@ -120,6 +123,7 @@ end
 
 
 
+
 ## GAME FUNCTIONALITY ##
 def game
     # User add & select inputs
@@ -131,9 +135,9 @@ def game
     condition = select_condition
     system "clear"
     # Starting the game
-    puts "On the first tee we have: #{name}, #{professional1}, #{professional2} at #{course} on a #{condition} day!"
+    puts "On the first tee we have: #{name}, #{professional1}, #{professional2} at #{course} on a #{condition} day!".colorize(:yellow)
     sleep(3)
-    puts "Great Shot! See you at the clubhouse!"
+    puts "Great Shot! See you at the clubhouse!".colorize(:blue)
     sleep(5)
     # Multipliers
     condition_difficulty = course.difficulty
@@ -147,27 +151,21 @@ def game
     name_score = rand(68..85) * overall_multiplier
     professional1_score = rand(68..85) * overall_multiplier
     professional2_score = rand(68..85) * overall_multiplier
-    name_score.to_i
-    professional1_score.truncate()
-    professional2_score.truncate()
+
     # Printing user scores
     system "clear"
-    puts "So here's how the group went!"
-    puts "#{name} scored: #{name_score}"
-    puts "#{professional1} scored: #{professional1_score}"
-    puts "#{professional2} scored: #{professional2_score}"
+    puts "So here's how the group went!".colorize(:yellow)
+    puts "#{name} scored: #{name_score.truncate()}"
+    puts "#{professional1} scored: #{professional1_score.truncate()}"
+    puts "#{professional2} scored: #{professional2_score.truncate()}"
     if name_score < professional1_score && name_score < professional2_score
-        puts "Congratulations you won!"
+        puts "Congratulations you won!".colorize(:green)
     elsif name_score > professional1_score && name_score < professional2_score || name_score < professional1_score && name_score > professional2_score
-        puts "Nice work out there!"
+        puts "Nice work out there!".colorize(:yellow)
     else
-        puts "Better luck next time!"
+        puts "Better luck next time!".colorize(:red)
     end
 end
-
-
-
-
 
 
 
@@ -176,18 +174,19 @@ end
 
 
 # WELCOME USER & SHOW MENU
-puts "Welcome to CaddyMate, add your score or have a match with the pros!"
+
 option = "" 
 
 
 # GET USERS MENU OPTIONS
 def select_option
-    answer = $prompt.enum_select("What would you like to do today?", "View rounds", "Add latest round", "Update a previous round", "Delete a round","Play with the pros","Exit")
+    answer = $prompt.enum_select("What would you like to do today?".colorize(:yellow), "View rounds", "Add latest round", "Update a previous round", "Delete a round","Play with the pros","Exit")
     return answer
 end
-
-
-while option !="Exit"
+# MENU OPERATION
+while option !="Exit"    
+    system "artii 'CaddyMate'"
+    puts "Welcome to CaddyMate, add your score or have a match with the pros!".colorize(:blue)
     option = select_option
     case option
         when "View rounds"
