@@ -3,7 +3,7 @@
 ![CaddyMate Logo](./img/CaddyMate.png)
 
 ## **Vital Links**
-[Github Repo](https://github.com/Btallan/T1A3---CaddyMate)
+[Github Repo](https://github.com/Btallan/T1A3---CaddyMate)<br>
 [Trello Board](https://trello.com/invite/b/7lEyGUmX/53e0e60dd149034f9fe8b89d8a7362c4/t1a3-terminal-app)
 
 
@@ -66,10 +66,10 @@ Users will also be able to edit the data points of their previous matches such a
 
 
 ### Installation
-- Pull from GitHub
-- Install Bundler
-- Run bundler to install gems
-- In desired CLI targeted at cloned folder run ‘ruby golf.rb’
+- Pull from GitHub,
+- In CLI install bundler using `gem install bundler`
+- To install dependant gems run `bundle install`
+- In desired CLI targeted at cloned folder run `ruby golf.rb`
 
 
 
@@ -82,5 +82,10 @@ Users will also be able to edit the data points of their previous matches such a
 ![Control Flow Diagram](./img/Control_Flows.PNG)
 
 ## Trello board progression
+### 16-12-21
+![Trello Board Progression: 17-12-21](./img/16-12-21_Trello_Screenshot.PNG)
+![Trello Board Progression: 17-12-21](./img/16-12-21_Trello_Screenshot#2.PNG)
+
+### 17-12-21
 ![Trello Board Progression: 17-12-21](./img/17-12-21_Trello_Screenshot.PNG)
 
