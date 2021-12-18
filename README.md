@@ -75,6 +75,11 @@ Users will also be able to edit the data points of their previous matches such a
 
 
 ## Error Handling
+Error handling methods are housed in `error_handling.rb`. This file currently contains two methods. 
+
+`check_score` aims to ensure the scores entered by the user are reasonable, but also valid scores. The user will be prompted if they enter a score below 1, as they must take at least one shot, but also prompted to ensure their input is correct if they score over 300.
+
+`check_name` checks the name inputs of the user to ensure that no names are blank.If the users input is blank, they will be prompted to enter a valid name until done so. The user can add any name or username they wish.
 
 
 
