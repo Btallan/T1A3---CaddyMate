@@ -1,6 +1,5 @@
 require_relative 'seed.rb'
 require_relative 'error_handling.rb'
-require_relative 'ind_methods.rb'
 
 require "tty-prompt"
 require "tty-progressbar"
