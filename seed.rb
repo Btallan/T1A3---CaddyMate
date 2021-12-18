@@ -1,9 +1,9 @@
-require_relative './methods/player.rb'
-require_relative './methods/course.rb'
-require_relative './methods/condition.rb'
-require_relative './methods/score.rb'
-require_relative './methods/rounds.rb'
-require_relative './methods/club.rb'
+require_relative './classes/player.rb'
+require_relative './classes/course.rb'
+require_relative './classes/condition.rb'
+require_relative './classes/score.rb'
+require_relative './classes/rounds.rb'
+require_relative './classes/club.rb'
 
 
 def seed

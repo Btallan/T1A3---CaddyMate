@@ -1,4 +1,7 @@
 require_relative 'seed.rb'
+require_relative 'error_handling.rb'
+require_relative 'ind_methods.rb'
+
 require "tty-prompt"
 require "artii"
 require "colorize"
@@ -27,8 +30,8 @@ def select_round
 end
 
 
-def select_player
-    player = $prompt.enum_select("Choose a professional?", $players_array)
+def select_name
+    name = $prompt.enum_select("Choose a professional?", $names_array)
 end
 
 def select_club
@@ -40,47 +43,47 @@ def select_swing_speed
     swing_speed = gets.chomp
 end
 
-def check_score
-    validity = false
-    while validity != true
-        puts "What did you score?"
-        score = gets.chomp.to_i
-        #  CHECKING USER SCORE IS BETWEEN 1 TO 300
-        if score.to_i > 1 && score.to_i < 300        
-            validity = true
-            #puts "Score is valid: 1-300"
-        elsif score.to_i <= 1
-            puts "You can't score less than 1!".colorize(:red)
-            redo
-        else
-            # IF SCORE OVER 300 PROMPT USER
-            puts "Did you really score over 300? (y/n)"
-            answer = gets.chomp
-            if answer == "y"
-                validity = true
-                #puts "Score is valid: 300+"
-            elsif
-                puts "Score was entered in-correctly!"
-                redo
-            end
-        end 
-    end
-    return score
-end
+# def check_score
+#     validity = false
+#     while validity != true
+#         puts "What did you score?"
+#         score = gets.chomp.to_i
+#         #  CHECKING USER SCORE IS BETWEEN 1 TO 300
+#         if score.to_i > 1 && score.to_i < 300        
+#             validity = true
+#             #puts "Score is valid: 1-300"
+#         elsif score.to_i <= 1
+#             puts "You can't score less than 1!".colorize(:red)
+#             redo
+#         else
+#             # IF SCORE OVER 300 PROMPT USER
+#             puts "Did you really score over 300? (y/n)"
+#             answer = gets.chomp
+#             if answer == "y"
+#                 validity = true
+#                 #puts "Score is valid: 300+"
+#             elsif
+#                 puts "Score was entered in-correctly!"
+#                 redo
+#             end
+#         end 
+#     end
+#     return score
+# end
 
-def check_name
-    name = ""
-    while name == ""
-        puts "What's your name?"
-        name = gets.chomp
-        if !name.empty?
-            return name
-            break
-        else
-            puts "Please enter a valid name!"      
-        end
-    end
-end
+# def check_name
+#     name = ""
+#     while name == ""
+#         puts "What's your name?"
+#         name = gets.chomp
+#         if !name.empty?
+#             return name
+#             break
+#         else
+#             puts "Please enter a valid name!"      
+#         end
+#     end
+# end
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 # CRUD QUERIES
@@ -103,13 +106,13 @@ end
 def update_round(golf)
     system "clear"
     round = select_round
-    # puts round.select(player)
+    # puts round.select(name)
     option = $prompt.enum_select("What would you like to change?", "Name","Score", "Course","Condition","All","None")
     case option
         when "Name"
             puts "Update Name"
-            puts "Your name was: #{round.player}".colorize(:yellow)
-            round.player = check_name
+            puts "Your name was: #{round.name}".colorize(:yellow)
+            round.name = check_name
             puts "#{round}".colorize(:yellow)
         when "Score"
             puts "Update Score"
@@ -129,9 +132,9 @@ def update_round(golf)
         when "All"
             puts "Update All"
             # Name Update
-            puts "Your name was: #{round.player}".colorize(:yellow)
+            puts "Your name was: #{round.name}".colorize(:yellow)
             name = check_name   
-            round.player = name
+            round.name = name
             # Course Update
             puts "The course was: #{round.course}".colorize(:yellow)
             round.course = select_course
@@ -174,8 +177,8 @@ def play_the_pros
     # User add & select inputs
     # USER INPUT NAME & VALIDATION
     name = check_name   
-    professional1 = select_player
-    professional2 = select_player
+    professional1 = select_name
+    professional2 = select_name
     course = select_course
     condition = select_condition
     system "clear"
@@ -192,7 +195,7 @@ def play_the_pros
     overall_multiplier = ((course.difficulty + condition.difficulty)/2) + 1    
     #puts "Overall Multiplier #{overall_multiplier}"
     # random score (68-85) x multiple of condition
-    # Generating player Scores
+    # Generating name Scores
     odds = rand(68..72)
     name_score = odds * overall_multiplier
     professional1_score = odds * overall_multiplier
@@ -217,46 +220,46 @@ end
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 # Play a Hole FUNCTIONALITY
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
-def play_a_hole
+# def play_a_hole
 
-    # GENERATE HOLE
-    length = rand(150..500).to_i
-    if length > 150 && length < 275
-        difficulty = 0.2
-        level = "Easy"
-    elsif length > 276 && length < 400
-        difficulty = 0.4
-        level = "Medium"
-    else
-        difficulty = 0.6
-        level = "Hard"
-    end
+#     # GENERATE HOLE
+#     length = rand(150..500).to_i
+#     if length > 150 && length < 275
+#         difficulty = 0.2
+#         level = "Easy"
+#     elsif length > 276 && length < 400
+#         difficulty = 0.4
+#         level = "Medium"
+#     else
+#         difficulty = 0.6
+#         level = "Hard"
+#     end
 
-    puts "The length of the whole is #{length}m"
-    puts "THe difficulty is: #{level} - #{difficulty}"
+#     puts "The length of the whole is #{length}m"
+#     puts "THe difficulty is: #{level} - #{difficulty}"
 
-    distance_left = length
-    while distance_left > 15
+#     distance_left = length
+#     while distance_left > 15
 
-        # USER SELECTS CLUB & SPEED
-        club = select_club
-        puts "Club Used: #{club}"
-        swing_speed = select_swing_speed
-        puts "Swing Speed: #{swing_speed}"
+#         # USER SELECTS CLUB & SPEED
+#         club = select_club
+#         puts "Club Used: #{club}"
+#         swing_speed = select_swing_speed
+#         puts "Swing Speed: #{swing_speed}"
 
-        # GENERATE LENGTH OF HIT & Accuracy
-        club_hit = rand(0.1..1) * swing_speed.to_i
-        puts "Hit Distance: #{club_hit}m" 
-        puts "Distance Left: #{distance_left}m"
+#         # GENERATE LENGTH OF HIT & Accuracy
+#         club_hit = rand(0.1..1) * swing_speed.to_i
+#         puts "Hit Distance: #{club_hit}m" 
+#         puts "Distance Left: #{distance_left}m"
 
 
 
-        # CALCULATE DISTANCE LEFT
-        distance_left.to_i - club_hit.to_i
-        puts "Distance Left: #{distance_left}m"
-    end
+#         # CALCULATE DISTANCE LEFT
+#         distance_left.to_i - club_hit.to_i
+#         puts "Distance Left: #{distance_left}m"
+#     end
 
-end 
+# end 
 
 
 
