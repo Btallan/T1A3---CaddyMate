@@ -28,14 +28,11 @@ end
 
 def check_name
     name = ""
-    while name == ""
-        puts "What's your name?"
-        name = gets.chomp
-        if !name.empty?
-            return name
-            break
-        else
-            puts "Please enter a valid name!"      
-        end
+    puts "What's your name?"
+    name = gets.chomp
+    while name == "" || name.strip == ""
+        puts "Please enter a valid name!"   
+        name = gets.chomp  
     end
+    return name
 end
