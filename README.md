@@ -70,6 +70,8 @@ Users will also be able to edit the data points of their previous matches such a
 - In CLI install bundler using `gem install bundler`
 - To install dependant gems run `bundle install`
 - In desired CLI targeted at cloned folder run `ruby golf.rb`
+OR
+- Run `./run_app.sh`
 
 
 
@@ -94,3 +96,5 @@ Error handling methods are housed in `error_handling.rb`. This file currently co
 ### 17-12-21
 ![Trello Board Progression: 17-12-21](./img/17-12-21_Trello_Screenshot.PNG)
 
+### 18-12-21
+![Trello Board Progression: 17-12-21](./img/18-12-21_Trello_Screenshot.PNG)

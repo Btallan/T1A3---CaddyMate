@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Remove Gemfile.lock
-rm Gemfile.lock
-rm ind_methods.rb
+
+# rm Gemfile.lock
+# rm ind_methods.rb
 
 gem install bundle
 gem install tty-prompt
