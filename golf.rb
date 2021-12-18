@@ -3,13 +3,17 @@ require_relative 'error_handling.rb'
 require_relative 'ind_methods.rb'
 
 require "tty-prompt"
+require "tty-progressbar"
 require "artii"
 require "colorize"
+
 
 $golf = seed
 $prompt = TTY::Prompt.new
 artii = Artii::Base.new
 system "clear"
+
+$bar = TTY::ProgressBar.new("Playing round...[:bar]", total: 50)
 
 
 
@@ -31,7 +35,7 @@ end
 
 
 def select_name
-    name = $prompt.enum_select("Choose a professional?", $names_array)
+    name = $prompt.enum_select("Choose a professional?", $players_array)
 end
 
 def select_club
@@ -145,7 +149,13 @@ def play_the_pros
     puts "On the first tee we have: #{name}, #{professional1}, #{professional2} at #{course} on a #{condition} day!".colorize(:yellow)
     sleep(3)
     puts "Great Shot! See you at the clubhouse!".colorize(:blue)
-    sleep(5)
+
+    50.times do
+        sleep(0.1)
+        $bar.advance  # by default increases by 1
+      end
+
+
     # Multipliers
     condition_difficulty = course.difficulty
     course_difficulty = condition.difficulty

@@ -4,8 +4,7 @@ require_relative './classes/condition.rb'
 require_relative './classes/score.rb'
 require_relative './classes/rounds.rb'
 require_relative './classes/club.rb'
-require_relative 'error_handling.rb'
-require_relative 'ind_methods.rb'
+
 
 
 def seed
