@@ -7,6 +7,8 @@ require "tty-progressbar"
 require "artii"
 require "colorize"
 
+usernmae = ""
+username = ARGV[0]
 
 $golf = seed
 $prompt = TTY::Prompt.new
@@ -254,7 +256,7 @@ end
 # MENU OPERATION
 while option !="Exit"    
     system "artii 'CaddyMate'"
-    puts "Welcome to CaddyMate, add your score or have a match with the pros!".colorize(:blue)
+    puts "Welcome #{username} to CaddyMate, add your score or have a match with the pros!".colorize(:blue)
     option = select_option
     case option
         when "View rounds"
@@ -274,8 +276,6 @@ while option !="Exit"
         else
             puts "Invalid Option"
     end
-    print "Press Enter key to continue..."
-    gets
     system "clear"
 end
 
